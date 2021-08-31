@@ -1,6 +1,8 @@
-A simulation tool to filter ground from the point cloud using machine learning 
+# Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)
  
-This repository contains tools to simulate the ground filtering process of a registered point cloud using Principal Component Analysis (PCA) and adjustment to a plane. 
+This repository contains tools to simulate the ground filtering process of a registered point cloud using Principal Component Analysis (PCA) and adjustment to a plane. This repository contains the code to reproduce the results presented in the paper following paper:
+
+*Diaz, Nelson, et al. "Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)," summited to International Journal of Applied Earth Observation and Geoinformation, 2021.
  
 ##  Introduction
  
