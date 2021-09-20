@@ -20,8 +20,8 @@ It is recommended to install the toolbox of Computer Vision (TCV). TCV contains 
  
  ##  Installation
  
-To run the code, use the function Main.m that performs the PCA for each point and its corresponding K-nearest neighbors, then a Naive Bayes classifier improves the ground filtering.  In the last stage, the points are adjusted to a plane, discarding the farthest points.
+To run the code, use the function Main2.m that performs the PCA for each point and its corresponding K-nearest neighbors, then a Naive Bayes classifier improves the ground filtering.  In the last stage, the points are adjusted to a plane, discarding the farthest points.
  
  ##  Configuration
 
- The tools are developed in Matlab R2019b.
+ The tools are developed in Matlab R2020b.
