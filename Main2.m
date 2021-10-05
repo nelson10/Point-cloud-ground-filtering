@@ -4,11 +4,12 @@ clear all;
 close all;
 clc;
 
-addpath(genpath('./dataset'));
-addpath(genpath('./indices'));
+%% Add path for data and source code
+addpath(genpath('./dataset1'));
+addpath(genpath('./src'));
 
-% load point cloud points
-data = 1;
+%% load point cloud points
+data = 2;
 if(data ==1 )
     dataset = "ajaccio_2";
 elseif(data ==2)
