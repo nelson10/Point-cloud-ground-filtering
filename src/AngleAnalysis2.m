@@ -10,10 +10,10 @@ if(dataset=="ajaccio_2")
 elseif(dataset=="ajaccio_57")
     nm = 10;
     idx = ((Deg>=(angle-nm)).*(Deg<=(angle+nm)));
-    [U,V]= results(ptCloud,idx,N);
+    [U,V]= results2(ptCloud,idx,N);
 elseif(dataset=="dijon_9")
     nm = 2;
     idx = ((Deg>=(angle-nm)).*(Deg<=(angle+nm)));
-    [U,V]= results(ptCloud,idx,N);
+    [U,V]= results2(ptCloud,idx,N);
 end
 end
