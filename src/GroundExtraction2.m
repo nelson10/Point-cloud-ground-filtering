@@ -1,4 +1,4 @@
-function [idx] = GroundExtraction2(N,X,indices,ptCloud,dataset)
+function [idx] = GroundExtraction2(N,X,indices)
 ang = zeros(N,1);
 pl = zeros(N,1);
 %% Compute normal between the eigenvector corresponding to the smalles eigenvalue and the normalize eigenvalues
@@ -22,14 +22,17 @@ for i=1:N
     else
         pl(i,1) = 2;
     end
-    [e, ind] = sort(e,'ascend'); % Sort in ascending order
+    [es, ind] = sort(e,'ascend'); % Sort in ascending order
     ne = e./sum(e); % Normalize eigenvalues
-    normal1 = V(:,ind(1));
-    v1 = ne; % first vector
-    v2 = normal1; % second vector
-    ang(i) = atan2(norm(cross(v1,v2)), dot(v1,v2));
+    normal1 = V(:,ind(1)); % eigenvector of the smallest eigenvalue
+    v2 = ne; % first vector
+    v1 = normal1; % second vector
+    %ang(i) = atan2(norm(cross(v1,v2)), dot(v1,v2));
+    den = sqrt(sum(v1.^2)) * sqrt(sum(v2.^2));
+    num = dot(v1,v2);
+    ang(i) = acos(num/den);
 end
 
-[idx] = AngleAnalysis2(ptCloud,ang,dataset,N);
-
+[idx] = AngleAnalysis2(ang);
+idx = ~idx;
 end

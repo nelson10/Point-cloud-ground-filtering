@@ -1,4 +1,4 @@
-function [idxn] = naivesClassifier(N,indices,ind,ptCloud,K)
+function [idxn] = naivesClassifier(N,indices,ind,K)
 U = sum(ind);
 V = N-U;
 PU = U/N;
@@ -16,7 +16,4 @@ for i=1:N
     ppv(i) = PV*PVK(i);
     idxn(i) = (ppu(i)>ppv(i));
 end
-[U,V] = results2(ptCloud,idxn,N);
-
-
 end

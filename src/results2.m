@@ -1,9 +1,8 @@
-function [U,V] = results2(ptCloud,idx,N)
-id = 1:N;
-figure(1);
-pcshow(ptCloud.Location(id(idx==0),:),[1 0 0]); %Red
+function [U,V] = results2(ptCloud,idx)
+pcshow(ptCloud.Location(idx==1,:),[0 1 0]); %Red
 hold on
-pcshow(ptCloud.Location(id(idx==1),:),[0 0 1]); %Blue
+pcshow(ptCloud.Location(idx==0,:),[0 0 1]); %Blue
+title('Fit Least square ')
 % figure(1)
 % plot3(X(idx==0,1),X(idx==0,2),X(idx==0,3),'b.'); %Red
 % hold on
