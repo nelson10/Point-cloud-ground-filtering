@@ -9,7 +9,7 @@ addpath(genpath('./dataset1'));
 addpath(genpath('./src'));
 
 %% load pont cloud points
-data = 3;
+data = 1;
 plots = 0;
 if(data ==1 )
     dataset = "ajaccio_2";
@@ -26,7 +26,7 @@ T = 10e7;
 p = round(T/N);
 %indices = zeros(N,K);
 %ptCloud = pcread('teapot.ply');
-S = 10;
+S = 20;
 g = boolean(zeros(N*S,1));
 K = 50;
 for s=1:S
@@ -80,34 +80,44 @@ for s=1:S
         title('Fit Least square ')
     end
     
-    %if(sd >= 0.1)
-    %     [remainPtCloud,plane] = fitRansac(ptCloud);
-    %     [remainPtCloud2,plane2] = fitRansac(remainPtCloud);
-    %     %% Plot fit plane using RANSAC
-    %     subplot(2,2,4),pcshow(plane.Location,[1 0 0])
-    %     hold on
-    %     subplot(2,2,4),pcshow(plane2.Location,[1 0 0])
-    %     hold on
-    %     subplot(2,2,4),pcshow(remainPtCloud2.Location,[0 0 1])
-    %     title('Fit using RANSAC ')
-    %else
     %% Fit plane using RANSAC Algorithm
-    ptCloud2 = pointCloud(X(ind2,:));
-    [remainPtCloud,plane,inlierIndices] = fitRansac(ptCloud2);
-    if(plots ==1)
-        subplot(2,2,4),pcshow(plane.Location,[1 0 0])
-        hold on
-        subplot(2,2,4),pcshow(remainPtCloud.Location,[0 0 1])
-        hold on
-        subplot(2,2,4),pcshow(ptCloud.Location(~ind2,:),[0 0 1])
-        title('Fit using RANSAC ');
+    if(data == 1)
+        t =find(ind2);  % ground indexes before fit to RANSAC
+        ptCloud2 = pointCloud(X(t,:));
+        [remainPtCloud,plane,inlierIndices,outlierIndices] = fitRansac(ptCloud2);
+        if(plots ==1)
+            subplot(2,2,4),pcshow(plane.Location,[1 0 0])
+            hold on
+            subplot(2,2,4),pcshow(remainPtCloud.Location,[0 0 1])
+            hold on
+            subplot(2,2,4),pcshow(ptCloud.Location(~ind2,:),[0 0 1])
+            title('Fit using RANSAC ');
+        end
+        timeElapsed = toc;
+        disp(num2str(s) +" Computation time " + num2str(timeElapsed))
+        g(id(t(inlierIndices)))=1; % ground indexes after fit to RANSAC
+    else
+        t =find(ind2);  % ground indexes before fit to RANSAC
+        ptCloud2 = pointCloud(X(t,:));
+        [remainPtCloud,plane,inlierIndices1,outlierIndices1] = fitRansac(ptCloud2);
+        t2 = outlierIndices1;
+        [remainPtCloud2,plane2,inlierIndices2,outlierIndices2] = fitRansac(remainPtCloud);
+        g(id(t(inlierIndices1)))=1; % ground indexes after fit to RANSAC
+        g(id(t(t2(inlierIndices2))))=1; % ground indexes after fit to RANSAC
+        if(plots ==1)
+            %% Plot fit plane using RANSAC
+            subplot(2,2,4),pcshow(plane.Location,[1 0 0])
+            hold on
+            subplot(2,2,4),pcshow(plane2.Location,[1 0 0])
+            hold on
+            subplot(2,2,4),pcshow(remainPtCloud2.Location,[0 0 1])
+            title('Fit using RANSAC ')
+        end
+        timeElapsed = toc;
+        disp(num2str(s) +" Computation time " + num2str(timeElapsed))
     end
-    timeElapsed = toc;
-    disp("Computational time " + num2str(timeElapsed))
-    t =find(ind2);
-    g(id(t(inlierIndices)))=1;
 end
-figure(1)
+figure(2)
 pcshow(ptCloud1.Location(g,:),[1 0 0])
 hold on;
 pcshow(ptCloud1.Location(~g,:),[0 0 1])
