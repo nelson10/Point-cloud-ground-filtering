@@ -1,4 +1,4 @@
-function [remainPtCloud,plane] = fitRansac(ptCloud)
+function [remainPtCloud,plane,inlierIndices,outlierIndices] = fitRansac(ptCloud)
 maxDistance = 0.02;
 referenceVector = [0,0,1];
 maxAngularDistance = 5;
