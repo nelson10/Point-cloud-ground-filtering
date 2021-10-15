@@ -5,7 +5,7 @@ close all;
 clc;
 
 %% Add path for data and source code
-addpath(genpath('./dataset1'));
+addpath(genpath('./dataset'));
 addpath(genpath('./src'));
 
 %% load pont cloud points
