@@ -1,15 +1,15 @@
 % PhD Nelson Eduardo Díaz
-% Point cloud filtering
+%% 3D point cloud ground filtering
 clear all;
 close all;
 clc;
 
 %% Add path for data and source code
-addpath(genpath('./dataset'));
+addpath(genpath('./dataset1'));
 addpath(genpath('./src'));
 
 %% load pont cloud points
-data = 1;
+data = 4;
 plots = 0;
 if(data ==1 )
     dataset = "ajaccio_2";
@@ -17,6 +17,8 @@ elseif(data ==2)
     dataset = "ajaccio_57";
 elseif(data ==3)
     dataset = "dijon_9";
+elseif(data ==4)
+    dataset = "Lille2";
 end
 text = dataset+".ply";
 tic
@@ -46,7 +48,7 @@ for s=1:S
     ptCloud = pointCloud(X);
     
     %% Search K-nearest neighbors
-    indices = knnsearch(Y,Y,'K',50,'Distance','euclidean'); % K-nearest neighbor search
+    indices = knnsearch(X,X,'K',50,'Distance','euclidean'); % K-nearest neighbor search
     
     %% Ground filtering
     [ind] = GroundExtraction2(N,Y,indices);
@@ -81,7 +83,7 @@ for s=1:S
     end
     
     %% Fit plane using RANSAC Algorithm
-    if(data == 1)
+    if(data == 4)
         t =find(ind2);  % ground indexes before fit to RANSAC
         ptCloud2 = pointCloud(X(t,:));
         [remainPtCloud,plane,inlierIndices,outlierIndices] = fitRansac(ptCloud2);
