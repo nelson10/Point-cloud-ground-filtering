@@ -1,15 +1,16 @@
-% PhD Nelson Eduardo Díaz
-%% 3D point cloud ground filtering
+%% PhD Nelson Díaz
+% Universidad Industrial de Santander
+% 3D point cloud ground filtering
 clear all;
 close all;
 clc;
 
 %% Add path for data and source code
-addpath(genpath('./dataset1'));
+addpath(genpath('./dataset'));
 addpath(genpath('./src'));
 
 %% load pont cloud points
-data = 4;
+data = 7;
 plots = 0;
 if(data ==1 )
     dataset = "ajaccio_2";
@@ -19,6 +20,16 @@ elseif(data ==3)
     dataset = "dijon_9";
 elseif(data ==4)
     dataset = "Lille2";
+    load('classLille2.mat');
+elseif(data ==5)
+    dataset = "Paris";
+    load('classParis.mat');
+elseif(data ==6)
+    dataset = "Lille1_1";
+    load('classLille1_1.mat');
+elseif(data ==7)
+    dataset = "Lille1_2";
+    load('classLille1_2.mat');
 end
 text = dataset+".ply";
 tic
@@ -26,13 +37,11 @@ ptCloud1 = pcread(text);
 N = 65536;
 T = 10e7;
 p = round(T/N);
-%indices = zeros(N,K);
-%ptCloud = pcread('teapot.ply');
 S = 20;
 g = boolean(zeros(N*S,1));
+label = labels(1:N*S);
 K = 50;
 for s=1:S
-    %s = ;
     id = ((s-1)*N)+1:((s)*N);
     x = ptCloud1.Location(id,1); % Load x dimension
     y = ptCloud1.Location(id,2); % Load y dimension
@@ -83,7 +92,7 @@ for s=1:S
     end
     
     %% Fit plane using RANSAC Algorithm
-    if(data == 4)
+    if(data >= 4)
         t =find(ind2);  % ground indexes before fit to RANSAC
         ptCloud2 = pointCloud(X(t,:));
         [remainPtCloud,plane,inlierIndices,outlierIndices] = fitRansac(ptCloud2);
@@ -120,8 +129,37 @@ for s=1:S
     end
 end
 figure(2)
-pcshow(ptCloud1.Location(g,:),[1 0 0])
+subplot(1,2,1),pcshow(ptCloud1.Location(g,:),[1 0 0])
 hold on;
-pcshow(ptCloud1.Location(~g,:),[0 0 1])
+subplot(1,2,1),pcshow(ptCloud1.Location(~g,:),[0 0 1])
+title("Result of the proposed algorithm")
+subplot(1,2,2),pcshow(ptCloud1.Location(label~=1,:),[0 0 1])
+hold on;
+subplot(1,2,2),pcshow(ptCloud1.Location(label==1,:),[1 0 0])
+title("established groundtruth")
 
+alg1 = g; % Ground
+alg2 = ~g; % Non-ground
+gt1 = label==1; % ground
+gt2 = label~=1; % Non-ground
+trueMat = gt1;
+predictedMat = alg1;
 
+[TP, FP, TN, FN] = calError(trueMat, predictedMat);
+disp("TP=" + TP + " FP=" + FP + " TN=" + TN + " FN " + FN);
+Accuracy = (TP + TN) / (TP+FP+TN+FN);
+disp("Accuracy " + Accuracy*100 +"%");
+
+TypeIerror = FP / (TP + FP);
+TypeIIerror = FN / (FN + TN);
+Totalerror = (FP + FN) / (TP + FP + FN + TN);
+
+disp("TypeIerror= " + TypeIerror*100 +"% TypeIIerror= "+ TypeIIerror*100 +"% Totalerror= "+ Totalerror*100 + "%")
+
+precision = TP / (TP + FP);
+Recall = TP / (TP + FN);
+b = 1;
+Fmeasure = ((1 + b^2)*TP)/ ((1+b^2)*TP + b^2*FN + FP);
+IoU = TP /(TP + FP + FN);
+
+disp("Precision= " + precision +"% Recall= "+ Recall +"% Fmeasure= "+ Fmeasure + " IoU= " + IoU)
