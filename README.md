@@ -1,6 +1,6 @@
 # Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)
  
-This repository contains tools to simulate the ground filtering process of a registered point cloud using Principal Component Analysis (PCA) and adjustment to a plane. This repository contains the code to reproduce the results presented in the paper following paper:
+This repository contains tools to simulate the ground filtering process of a registered point cloud using two filtering methods. The first method uses normal vector and fits a plane. The second method utilizes voxel adjacency and fits to plane. This repository contains the code to reproduce the results presented in the paper following paper:
 
 *Diaz, Nelson, et al. "Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)," summited to International Journal of Applied Earth Observation and Geoinformation, 2021.
  
@@ -10,7 +10,7 @@ The software allows simulating the ground filtering process in point clouds usin
  
  ##  Requirements
  
-This module requires the following datasets Ajaccio_2.ply, Ajaccio_57.ply y dijon_9.ply, which may be download from the following [link](https://cloud.mines-paristech.fr/index.php/s/JhIxgyt0ALgRZ1O?path=%2Ftest_10_classes)
+This module requires the following datasets Ajaccio_2.ply, Ajaccio_57.ply y dijon_9.ply, which may be downloaded from the following [link](https://cloud.mines-paristech.fr/index.php/s/JhIxgyt0ALgRZ1O?path=%2Ftest_10_classes). In addition, scans with groundtruth are available in [link](https://cloud.mines-paristech.fr/index.php/s/JhIxgyt0ALgRZ1O?path=%2Ftraining_10_classes).
 
 The datasets may be included in the folder dataset.
  
@@ -20,7 +20,7 @@ It is recommended to install the toolbox of Computer Vision (TCV). TCV contains 
  
  ##  Installation
  
-To run the code, use the function Main2.m that performs the PCA for each point and its corresponding K-nearest neighbors, then a Naive Bayes classifier improves the ground filtering.  In the last stage, the points are adjusted to a plane, discarding the farthest points.
+To run the code, use the function MainNormal.m that computes principal component analysis for each point and its corresponding K-nearest neighbors, then a Naive Bayes classifier improves the ground filtering.  In the last stage, the points are adjusted to a plane, discarding the farthest points. The second algorithm runs with the function MainVoxel.m
  
  ##  Configuration
 
