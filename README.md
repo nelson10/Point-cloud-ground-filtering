@@ -20,7 +20,7 @@ It is recommended to install the toolbox of Computer Vision (TCV). TCV contains 
  
  ##  Installation
  
-To run the code, use the function MainNormal.m that computes principal component analysis for each point and its corresponding K-nearest neighbors, then a Naive Bayes classifier improves the ground filtering.  In the last stage, the points are adjusted to a plane, discarding the farthest points. The second algorithm runs with the function MainVoxel.m
+To run the code, use the function MainNormal.m that computes principal component analysis for each point and its corresponding K-nearest neighbors, then a Naive Bayes classifier improves the ground filtering.  In the last stage, the points are adjusted to a plane, discarding the farthest points. The second algorithm runs with the function MainVoxel.m that.  The algorithm joints the points into voxels to reduce the computation time of the nearest neighbor. The algorithm discards the distant voxels with height thresholding, and then the remaining points are adjusted to a plane.
  
  ##  Configuration
 
