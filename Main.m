@@ -1,5 +1,4 @@
 %% PhD Nelson Díaz
-% Universidad Industrial de Santander
 % 3D point cloud ground filtering
 clear all;
 close all;
@@ -96,6 +95,7 @@ for s=1:S
         t =find(ind2);  % ground indexes before fit to RANSAC
         ptCloud2 = pointCloud(X(t,:));
         [remainPtCloud,plane,inlierIndices,outlierIndices] = fitRansac(ptCloud2);
+        
         if(plots ==1)
             subplot(2,2,4),pcshow(plane.Location,[1 0 0])
             hold on
@@ -104,6 +104,7 @@ for s=1:S
             subplot(2,2,4),pcshow(ptCloud.Location(~ind2,:),[0 0 1])
             title('Fit using RANSAC ');
         end
+        
         timeElapsed = toc;
         disp(num2str(s) +" Computation time " + num2str(timeElapsed))
         g(id(t(inlierIndices)))=1; % ground indexes after fit to RANSAC
@@ -113,8 +114,9 @@ for s=1:S
         [remainPtCloud,plane,inlierIndices1,outlierIndices1] = fitRansac(ptCloud2);
         t2 = outlierIndices1;
         [remainPtCloud2,plane2,inlierIndices2,outlierIndices2] = fitRansac(remainPtCloud);
-        g(id(t(inlierIndices1)))=1; % ground indexes after fit to RANSAC
-        g(id(t(t2(inlierIndices2))))=1; % ground indexes after fit to RANSAC
+        g(id(t(inlierIndices1))) = 1; % ground indexes after fit to RANSAC
+        g(id(t(t2(inlierIndices2)))) = 1; % ground indexes after fit to RANSAC
+        
         if(plots ==1)
             %% Plot fit plane using RANSAC
             subplot(2,2,4),pcshow(plane.Location,[1 0 0])
@@ -124,18 +126,19 @@ for s=1:S
             subplot(2,2,4),pcshow(remainPtCloud2.Location,[0 0 1])
             title('Fit using RANSAC ')
         end
+        
         timeElapsed = toc;
         disp(num2str(s) +" Computation time " + num2str(timeElapsed))
     end
 end
 figure(2)
-subplot(1,2,1),pcshow(ptCloud1.Location(g,:),[1 0 0])
+subplot(1,2,1), pcshow(ptCloud1.Location(g,:),[1 0 0])
 hold on;
-subplot(1,2,1),pcshow(ptCloud1.Location(~g,:),[0 0 1])
+subplot(1,2,1), pcshow(ptCloud1.Location(~g,:),[0 0 1])
 title("Result of the proposed algorithm")
-subplot(1,2,2),pcshow(ptCloud1.Location(label~=1,:),[0 0 1])
+subplot(1,2,2), pcshow(ptCloud1.Location(label~=1,:),[0 0 1])
 hold on;
-subplot(1,2,2),pcshow(ptCloud1.Location(label==1,:),[1 0 0])
+subplot(1,2,2), pcshow(ptCloud1.Location(label==1,:),[1 0 0])
 title("established groundtruth")
 
 alg1 = g; % Ground
@@ -162,4 +165,4 @@ b = 1;
 Fmeasure = ((1 + b^2)*TP)/ ((1+b^2)*TP + b^2*FN + FP);
 IoU = TP /(TP + FP + FN);
 
-disp("Precision= " + precision +"% Recall= "+ Recall +"% Fmeasure= "+ Fmeasure + " IoU= " + IoU)
+disp("Precision= " + precision*100 +"% Recall= "+ Recall*100 +"% Fmeasure= "+ Fmeasure*100 + " IoU= " + IoU*100)        
