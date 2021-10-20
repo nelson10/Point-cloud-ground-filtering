@@ -11,7 +11,7 @@ m = mean(Deg);
 s = std(Deg);
 ma= max(Deg);
 mi = min(Deg);
-disp("Angle mean "+ num2str(m)+" Angle std "+ num2str(s)+" Angle max "+ num2str(ma) +" Angle min "+ num2str(mi));
+%disp("Angle mean "+ num2str(m)+" Angle std "+ num2str(s)+" Angle max "+ num2str(ma) +" Angle min "+ num2str(mi));
 %if(dataset=="ajaccio_2")
 
 
