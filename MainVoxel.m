@@ -41,7 +41,9 @@ NT = 10e7;
 p = round(NT/N);
 S = 20;
 g = boolean(zeros(N*S,1));
-label = labels(1:N*S);
+if(data >= 4)
+    label = labels(1:N*S);
+end
 K = 50;
 rg = 0.04;
 plots = 0;
@@ -132,33 +134,35 @@ subplot(1,2,1), pcshow(ptCloud1.Location(g,:),[1 0 0])
 hold on;
 subplot(1,2,1), pcshow(ptCloud1.Location(~g,:),[0 0 1])
 title("Result of the proposed algorithm")
-subplot(1,2,2), pcshow(ptCloud1.Location(label~=1,:),[0 0 1])
-hold on;
-subplot(1,2,2), pcshow(ptCloud1.Location(label==1,:),[1 0 0])
-title("established groundtruth")
-
-alg1 = g; % Ground
-alg2 = ~g; % Non-ground
-gt1 = label==1; % ground
-gt2 = label~=1; % Non-ground
-trueMat = gt1;
-predictedMat = alg1;
-
-[TP, FP, TN, FN] = calError(trueMat, predictedMat);
-disp("TP=" + TP + " FP=" + FP + " TN=" + TN + " FN " + FN);
-Accuracy = (TP + TN) / (TP+FP+TN+FN);
-disp("Accuracy " + Accuracy*100 +"%");
-
-TypeIerror = FP / (TP + FP);
-TypeIIerror = FN / (FN + TN);
-Totalerror = (FP + FN) / (TP + FP + FN + TN);
-
-disp("TypeIerror= " + TypeIerror*100 +"% TypeIIerror= "+ TypeIIerror*100 +"% Totalerror= "+ Totalerror*100 + "%")
-
-precision = TP / (TP + FP);
-Recall = TP / (TP + FN);
-b = 1;
-Fmeasure = ((1 + b^2)*TP)/ ((1+b^2)*TP + b^2*FN + FP);
-IoU = TP /(TP + FP + FN);
-
-disp("Precision= " + precision*100 +"% Recall= "+ Recall*100 +"% Fmeasure= "+ Fmeasure*100 + " IoU= " + IoU*100)
+if(data >= 4)
+    subplot(1,2,2), pcshow(ptCloud1.Location(label~=1,:),[0 0 1])
+    hold on;
+    subplot(1,2,2), pcshow(ptCloud1.Location(label==1,:),[1 0 0])
+    title("established groundtruth")
+    
+    alg1 = g; % Ground
+    alg2 = ~g; % Non-ground
+    gt1 = label==1; % ground
+    gt2 = label~=1; % Non-ground
+    trueMat = gt1;
+    predictedMat = alg1;
+    
+    [TP, FP, TN, FN] = calError(trueMat, predictedMat);
+    disp("TP=" + TP + " FP=" + FP + " TN=" + TN + " FN " + FN);
+    Accuracy = (TP + TN) / (TP+FP+TN+FN);
+    disp("Accuracy " + Accuracy*100 +"%");
+    
+    TypeIerror = FP / (TP + FP);
+    TypeIIerror = FN / (FN + TN);
+    Totalerror = (FP + FN) / (TP + FP + FN + TN);
+    
+    disp("TypeIerror= " + TypeIerror*100 +"% TypeIIerror= "+ TypeIIerror*100 +"% Totalerror= "+ Totalerror*100 + "%")
+    
+    precision = TP / (TP + FP);
+    Recall = TP / (TP + FN);
+    b = 1;
+    Fmeasure = ((1 + b^2)*TP)/ ((1+b^2)*TP + b^2*FN + FP);
+    IoU = TP /(TP + FP + FN);
+    
+    disp("Precision= " + precision*100 +"% Recall= "+ Recall*100 +"% Fmeasure= "+ Fmeasure*100 + " IoU= " + IoU*100)
+end
