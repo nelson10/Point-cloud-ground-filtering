@@ -3,6 +3,20 @@
 This repository contains tools to simulate the ground filtering process of a registered point cloud. The repository contain two filtering methods. The first method uses normal vector, and fit to plane. The second method utilizes voxel adjacency, and fit to plane. This repository contains the code to reproduce the results presented in the paper following paper:
 
 *Diaz, Nelson, et al. "Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)," Accepted to International Journal of Applied Earth Observation and Geoinformation, 2021.
+
+If you use this code, please consider citing our paper with the following Bibtex code:
+
+```
+@ARTICLE{9534664,
+  author={Diaz, Nelson and Omar, Gallo and Caceres, Jhon and Porras, Hernan},
+  journal={International Journal of Applied Earth Observation and Geoinformation}, 
+  title={Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={},
+  doi={}}
+```
  
 ##  Introduction
  
