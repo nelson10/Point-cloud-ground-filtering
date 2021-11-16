@@ -8,7 +8,7 @@ If you use this code, please consider citing our paper with the following Bibtex
 
 ```
 @ARTICLE{9534664,
-  author={Diaz, Nelson and Omar, Gallo and Caceres, Jhon and Porras, Hernan},
+  author={Diaz, Nelson and Gallo, Omar and Caceres, Jhon and Porras, Hernan},
   journal={International Journal of Applied Earth Observation and Geoinformation}, 
   title={Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)}, 
   year={2021},
