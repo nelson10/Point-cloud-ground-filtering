@@ -7,7 +7,7 @@ This repository contains tools to simulate the ground filtering process of a reg
 If you use this code, please consider citing our paper with the following Bibtex code:
 
 ```
-@ARTICLE{9534664,
+@ARTICLE{JAG_102629,
   author={Diaz, Nelson and Gallo, Omar and Caceres, Jhon and Porras, Hernan},
   journal={International Journal of Applied Earth Observation and Geoinformation}, 
   title={Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)}, 
