@@ -7,15 +7,19 @@ This repository contains tools to simulate the ground filtering process of a reg
 If you use this code, please consider citing our paper with the following Bibtex code:
 
 ```
-@ARTICLE{JAG_102629,
-  author={Diaz, Nelson and Gallo, Omar and Caceres, Jhon and Porras, Hernan},
-  journal={International Journal of Applied Earth Observation and Geoinformation}, 
-  title={Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)}, 
-  year={2021},
-  volume={},
-  number={},
-  pages={},
-  doi={}}
+@article{DIAZ2021102629,
+title = {Real-time ground filtering algorithm of cloud points acquired using Terrestrial Laser Scanner (TLS)},
+journal = {International Journal of Applied Earth Observation and Geoinformation},
+volume = {105},
+pages = {102629},
+year = {2021},
+issn = {0303-2434},
+doi = {https://doi.org/10.1016/j.jag.2021.102629},
+url = {https://www.sciencedirect.com/science/article/pii/S0303243421003366},
+author = {Nelson Diaz and Omar Gallo and Jhon Caceres and Hernan Porras},
+keywords = {Ground filter, Normal vector, PCA, TLS, Voxel},
+abstract = {3D modeling based on point clouds requires ground-filtering algorithms that separate ground from non-ground objects. This study presents two ground filtering algorithms. The first one is based on normal vectors. It has two variants depending on the procedure to compute the k-nearest neighbors. The second algorithm is based on transforming the cloud points into a voxel structure. To evaluate them, the two algorithms are compared according to their execution time, effectiveness and efficiency. Results show that the ground filtering algorithm based on the voxel structure is faster in terms of execution time, effectiveness, and efficiency than the normal vector ground filtering.}
+}
 ```
  
 ##  Introduction
