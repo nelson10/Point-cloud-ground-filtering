@@ -42,4 +42,4 @@ To run the code, use the function MainNormal.m that computes principal component
  
  ##  Configuration
 
- The tools are developed in Matlab R2020b.
+ The tools are developed in Matlab R2019b.
