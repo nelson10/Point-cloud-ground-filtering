@@ -28,7 +28,7 @@ The software allows simulating the ground filtering process in point clouds usin
  
  ##  Requirements
  
-This module requires the following datasets Ajaccio_2.ply, Ajaccio_57.ply y dijon_9.ply, which may be downloaded from the following [link](https://cloud.mines-paristech.fr/index.php/s/JhIxgyt0ALgRZ1O?path=%2Ftest_10_classes). In addition, scans with groundtruth are available in [link](https://cloud.mines-paristech.fr/index.php/s/JhIxgyt0ALgRZ1O?path=%2Ftraining_10_classes).
+This module requires the following datasets Ajaccio_2.ply, Ajaccio_57.ply y dijon_9.ply, which may be downloaded from the following [link](https://cloud.mines-paristech.fr/index.php/s/JhIxgyt0ALgRZ1O?path=%2Ftest_10_classes). In addition, scans with groundtruth are available in [link](https://cloud.mines-paristech.fr/index.php/s/JhIxgyt0ALgRZ1O?path=%2Ftraining_10_classes). The password for both links is Paris-Lille-3D.
 
 The datasets may be included in the folder dataset.
  
